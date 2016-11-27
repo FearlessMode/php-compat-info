@@ -12,15 +12,16 @@
 
 namespace Bartlett\CompatInfo\Analyser;
 
-use Bartlett\CompatInfo\Sniffs;
+use Bartlett\CompatInfo\Sniffs\Sniffer;
 
 use Bartlett\Reflect\Analyser\AbstractSniffAnalyser;
 
 /**
- * This analyzer collects different metrics to find out :
+ * This analyzer collects different metrics to find out, e.g :
  * - keywords reserved
  * - deprecated elements
  * - removed elements
+ * and lot more.
  *
  * @category PHP
  * @package  PHP_CompatInfo
@@ -37,36 +38,90 @@ class MigrationAnalyser extends AbstractSniffAnalyser
      */
     public function __construct()
     {
-        $this->sniffs = array(
-            new Sniffs\PHP\IntroducedSniff(),
-            new Sniffs\PHP\RemovedSniff(),
-            new Sniffs\PHP\KeywordReservedSniff(),
-            new Sniffs\PHP\DeprecatedSniff(),
-            new Sniffs\PHP\RemovedSniff(),
-            new Sniffs\PHP\ShortOpenTagSniff(),
-            new Sniffs\PHP\ShortArraySyntaxSniff(),
-            new Sniffs\PHP\ArrayDereferencingSyntaxSniff(),
-            new Sniffs\PHP\ClassMemberAccessOnInstantiationSniff(),
-            new Sniffs\PHP\ConstSyntaxSniff(),
-            new Sniffs\PHP\MagicMethodsSniff(),
-            new Sniffs\PHP\AnonymousFunctionSniff(),
-            new Sniffs\PHP\NullCoalesceOperatorSniff(),
-            new Sniffs\PHP\VariadicFunctionSniff(),
-            new Sniffs\PHP\UseConstFunctionSniff(),
-            new Sniffs\PHP\ExponantiationSniff(),
-            new Sniffs\PHP\DocStringSyntaxSniff(),
-            new Sniffs\PHP\ClassExprSyntaxSniff(),
-            new Sniffs\PHP\BinaryNumberFormatSniff(),
-            new Sniffs\PHP\CombinedComparisonOperatorSniff(),
-            new Sniffs\PHP\ReturnTypeDeclarationSniff(),
-            new Sniffs\PHP\AnonymousClassSniff(),
-            new Sniffs\PHP\ShortTernaryOperatorSyntaxSniff(),
-            new Sniffs\PHP\NoCompatCallFromGlobalSniff(),
-            new Sniffs\PHP\NoCompatMagicMethodsSniff(),
-            new Sniffs\PHP\NoCompatBreakContinueSniff(),
-            new Sniffs\PHP\NoCompatParamSniff(),
-            new Sniffs\PHP\NoCompatRegisterGlobalsSniff(),
-            new Sniffs\PHP\NoCompatKeywordCaseInsensitiveSniff(),
-        );
+        $this->sniffs = [
+            // detect when an element was introduced in PHP
+            Sniffer::introducedSniff(),
+
+            // check for reserved keywords
+            Sniffer::keywordReservedSniff(),
+
+            // checks for deprecated elements
+            Sniffer::deprecatedSniff(),
+
+            // detect when an element was removed from PHP
+            Sniffer::removedSniff(),
+
+            // detect when short open tag syntax is used
+            Sniffer::shortOpenTagSniff(),
+
+            // detect when short array syntax is used
+            Sniffer::shortArraySyntaxSniff(),
+
+            // detect when array dereferencing syntax is used
+            Sniffer::arrayDereferencingSyntaxSniff(),
+
+            // detect when class member access on instantiation syntax is used
+            Sniffer::classMemberAccessOnInstantiationSniff(),
+
+            // check usage of CONST keyword outside of a class
+            Sniffer::constSyntaxSniff(),
+
+            // report use of magic methods not supported
+            Sniffer::magicMethodsSniff(),
+
+            // check for anonymous functions
+            Sniffer::anonymousFunctionSniff(),
+
+            // detect Null Coalesce Operator syntax
+            Sniffer::nullCoalesceOperatorSniff(),
+
+            // check usage of Variadic functions
+            Sniffer::variadicFunctionSniff(),
+
+            // check usage of use const, use function in classes
+            Sniffer::useConstFunctionSniff(),
+
+            // detect Exponentiation
+            Sniffer::exponantiationSniff(),
+
+            // check usage of nowdoc and heredoc syntax
+            Sniffer::docStringSyntaxSniff(),
+
+            // detect Class::{expr}() syntax
+            Sniffer::classExprSyntaxSniff(),
+
+            // detect Binary Number Format (with 0b prefix)
+            Sniffer::binaryNumberFormatSniff(),
+
+            // detect Combined Comparison (Spaceship) Operator syntax
+            Sniffer::combinedComparisonOperatorSniff(),
+
+            // detect Return Type Declarations
+            Sniffer::returnTypeDeclarationSniff(),
+
+            // check usage of Anonymous classes
+            Sniffer::anonymousClassSniff(),
+
+            // detect use of Elvis syntax
+            Sniffer::shortTernaryOperatorSyntaxSniff(),
+
+            //
+            Sniffer::noCompatCallFromGlobalSniff(),
+
+            //
+            Sniffer::noCompatMagicMethodsSniff(),
+
+            //
+            Sniffer::noCompatBreakContinueSniff(),
+
+            //
+            Sniffer::noCompatParamSniff(),
+
+            //
+            Sniffer::noCompatRegisterGlobalsSniff(),
+
+            //
+            Sniffer::noCompatKeywordCaseInsensitiveSniff(),
+        ];
     }
 }
