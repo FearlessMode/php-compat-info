@@ -363,6 +363,9 @@ class CompatibilityAnalyser extends AbstractAnalyser
             && strcasecmp('class', $node->name) === 0
         ) {
             $this->computePhpFeatureVersions($node);
+
+        } elseif ($node instanceof Node\Expr\Yield_) {
+            $this->computePhpFeatureVersions($node);
         }
     }
 
@@ -1256,7 +1259,13 @@ class CompatibilityAnalyser extends AbstractAnalyser
         } elseif ($node instanceof Node\Const_
             && !$node->value instanceof Node\Scalar
         ) {
-            $versions = array('php.min' => '5.6.0');
+            if (property_exists($node->value, 'expr')) {
+                // e.g: unary minus, unary plus expressions
+                $versions = array('php.min' => '4.0.0');
+            } else {
+                // scalar expression
+                $versions = array('php.min' => '5.6.0');
+            }
             // update current and parent context
             $this->updateElementVersion($element, $name, $versions);
             $this->updateContextVersion($versions);
@@ -1280,6 +1289,12 @@ class CompatibilityAnalyser extends AbstractAnalyser
         } elseif ($node instanceof Node\Expr\ClassConstFetch
             && strcasecmp('class', $node->name) === 0
         ) {
+            $versions = array('php.min' => '5.5.0');
+            // update current and parent context
+            $this->updateElementVersion($element, $name, $versions);
+            $this->updateContextVersion($versions);
+
+        } elseif ($node instanceof Node\Expr\Yield_) {
             $versions = array('php.min' => '5.5.0');
             // update current and parent context
             $this->updateElementVersion($element, $name, $versions);
