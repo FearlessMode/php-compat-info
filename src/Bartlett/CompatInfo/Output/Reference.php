@@ -153,7 +153,6 @@ class Reference extends OutputFormatter
             foreach ($values as $key => $val) {
                 if (strcasecmp($title, 'releases') == 0) {
                     $key = sprintf('%s (%s)', $val['date'], $val['state']);
-
                 } elseif (strcasecmp($title, 'methods') == 0
                     || strcasecmp($title, 'static methods') == 0
                 ) {

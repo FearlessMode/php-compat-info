@@ -108,7 +108,6 @@ class DeprecatedSniff extends SniffAbstract
                 );
             }
             $this->deprecatedFunctions[$name]['spots'][] = $this->getCurrentSpot($node);
-
         } elseif ($this->isDeprecatedDirective($node)) {
             $name = strtolower($node->args[0]->value->value);
 
@@ -123,7 +122,6 @@ class DeprecatedSniff extends SniffAbstract
                 );
             }
             $this->deprecatedDirectives[$name]['spots'][] = $this->getCurrentSpot($node);
-
         } elseif ($this->isDeprecatedAssignRef($node)) {
             $name = 'new';
 

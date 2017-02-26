@@ -87,7 +87,6 @@ class RemovedSniff extends SniffAbstract
                 );
             }
             $this->removed[$name]['spots'][] = $this->getCurrentSpot($node);
-
         } elseif ($this->isRemovedConst($node)) {
             $name = (string) $node->name;
 
@@ -111,16 +110,12 @@ class RemovedSniff extends SniffAbstract
     {
         if (version_compare($max, '5.3', 'lt')) {
             $version = '5.3.0';
-
         } elseif (version_compare($max, '5.4', 'lt')) {
             $version = '5.4.0';
-
         } elseif (version_compare($max, '5.5', 'lt')) {
             $version = '5.5.0';
-
         } elseif (version_compare($max, '5.6', 'lt')) {
             $version = '5.6.0';
-
         } elseif (version_compare($max, '7.0', 'lt')) {
             $version = '7.0.0';
         }
@@ -177,6 +172,5 @@ class RemovedSniff extends SniffAbstract
             ' FROM bartlett_compatinfo_constants c,  bartlett_compatinfo_extensions e' .
             ' WHERE c.ext_name_fk = e.id AND c.php_max <> ""'
         );
-
     }
 }

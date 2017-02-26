@@ -49,10 +49,8 @@ class NoCompatBreakContinueSniff extends SniffAbstract
     {
         if ($node instanceof Node\Stmt\Break_) {
             $operator = 'break';
-
         } elseif ($node instanceof Node\Stmt\Continue_) {
             $operator = 'continue';
-
         } else {
             return;
         }
@@ -65,13 +63,11 @@ class NoCompatBreakContinueSniff extends SniffAbstract
                 '<info>%s</info> operator with non-constant operand is no longer supported',
                 $operator
             );
-
         } elseif ($node->num instanceof Node\Scalar\LNumber && $node->num->value < 1) {
             $message = sprintf(
                 '<info>%s</info> operator accepts only positive numbers',
                 $operator
             );
-
         } else {
             return;
         }

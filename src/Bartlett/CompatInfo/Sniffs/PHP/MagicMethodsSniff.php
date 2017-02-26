@@ -51,13 +51,10 @@ class MagicMethodsSniff extends SniffAbstract
 
             if (in_array($name, $this->mm501)) {
                 $version = '5.1.0';
-
             } elseif (in_array($name, $this->mm503)) {
                 $version = '5.3.0';
-
             } elseif (in_array($name, $this->mm506)) {
                 $version = '5.6.0';
-
             } else {
                 return;
             }

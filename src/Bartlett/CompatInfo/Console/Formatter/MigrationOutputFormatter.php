@@ -142,7 +142,6 @@ class MigrationOutputFormatter extends OutputFormatter
                 if (Metrics::KEYWORD_RESERVED == $group) {
                     $label   = 'reserved';
                     $element = sprintf('Keyword <info>%s</info>', $element);
-
                 } elseif (in_array(
                     $group,
                     array(
@@ -155,7 +154,6 @@ class MigrationOutputFormatter extends OutputFormatter
                     if (Metrics::DEPRECATED_ASSIGN_REFS == $group) {
                         $element = isset($this->labels[$group]) ? $this->labels[$group] : $group;
                     }
-
                 } elseif (in_array(
                     $group,
                     array(
@@ -173,7 +171,6 @@ class MigrationOutputFormatter extends OutputFormatter
                     } else {
                         $label = 'available';
                     }
-
                 } elseif (Metrics::REMOVED == $group) {
                     if (null === $message) {
                         $element = sprintf('Function <info>%s()</info>', $element);
@@ -181,18 +178,14 @@ class MigrationOutputFormatter extends OutputFormatter
                         $element = $message;
                     }
                     $label = 'removed';
-
                 } elseif (Metrics::SHORT_OPEN_TAG == $group) {
                     $label   = 'always available';
                     $element = isset($this->labels[$group]) ? $this->labels[$group] : $group;
-
                 } elseif (Metrics::SHORT_ARRAY_SYNTAX == $group) {
                     $label = 'allowed';
-
                 } elseif (Metrics::CLASS_MEMBER_ACCESS_ON_INSTANTIATION == $group) {
                     $label   = 'allowed';
                     $element = 'Class member access on instantiation syntax';
-
                 } elseif (Metrics::CONST_SYNTAX == $group) {
                     if ('#' == $element) {
                         $grp = Metrics::CONST_SYNTAX_1;
@@ -201,10 +194,8 @@ class MigrationOutputFormatter extends OutputFormatter
                     }
                     $element = isset($this->labels[$grp]) ? $this->labels[$grp] : $group;
                     $label   = 'allowed';
-
                 } elseif (Metrics::MAGIC_METHODS == $group) {
                     $label = 'available';
-
                 } elseif (Metrics::INTRODUCED == $group) {
                     if (null === $message) {
                         $element = sprintf('Function <info>%s()</info>', $element);
@@ -216,7 +207,6 @@ class MigrationOutputFormatter extends OutputFormatter
                     } else {
                         $label = 'removed';
                     }
-
                 } elseif (Metrics::ANONYMOUS_FUNCTION == $group) {
                     if ('this' == $element) {
                         $grp = Metrics::ANONYMOUS_FUNCTION_1;
@@ -230,12 +220,9 @@ class MigrationOutputFormatter extends OutputFormatter
                         $element = isset($this->labels[$grp]) ? $this->labels[$grp] : $group;
                     }
                     $label = 'allowed';
-
-
                 } elseif (Metrics::USE_CONST_FUNCTION == $group) {
                     $label   = 'allowed';
                     $element = isset($this->labels[$group]) ? $this->labels[$group] : $group;
-
                 } elseif (Metrics::DOC_STRING_SYNTAX == $group) {
                     if ('nowdoc' == $element) {
                         $grp = Metrics::DOC_STRING_SYNTAX_1;
@@ -246,7 +233,6 @@ class MigrationOutputFormatter extends OutputFormatter
                     }
                     $element = isset($this->labels[$grp]) ? $this->labels[$grp] : $group;
                     $label   = 'allowed';
-
                 } else {
                     $label   = 'allowed';
                     $element = isset($this->labels[$group]) ? $this->labels[$group] : $group;
