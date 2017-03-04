@@ -50,6 +50,7 @@ class Application extends BaseApplication
     public function getLongVersion()
     {
         $v = Environment::versionRefDb();
+        unlink(Environment::getDbFilename());
 
         return sprintf(
             '<info>%s</info> version <comment>%s</comment> DB version <comment>%s</comment> built <comment>%s</comment>',

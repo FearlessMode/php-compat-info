@@ -183,6 +183,9 @@ class Reference extends Common
         if (empty($results)) {
             return array('summary' => $summary);
         }
+
+        unlink(Environment::getDbFilename());
+
         return $closure($results);
     }
 }
